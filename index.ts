@@ -23,9 +23,19 @@ const menu: Pizza[] = [
 
 const orderQueue: Order[] = []
 
-function addNewPizza(pizzaObj: Pizza) {
-    pizzaObj.id=nextPizzaId++;
-    menu.push(pizzaObj)
+/**
+ * Challenge:
+ * Fix the addNewPizza function using the Omit utility type. This might
+ * require more than just changing the "Pizza" typed `pizzaObj` parameter.
+ * Return the new pizza object (with the id added) from the function.
+ */
+function addNewPizza(pizzaObj: Omit<Pizza, "id">):Pizza {
+    const newPizza={
+        id:nextPizzaId++,
+        ...pizzaObj
+    }
+    menu.push(newPizza)
+    return newPizza
 }
 
 function placeOrder(pizzaName: string): Order | undefined {
@@ -83,12 +93,13 @@ type User = {
     username: string
     role: "member" | "contributor" | "admin"
 }
+let nextUserId=1
 
 const users: User[] = [
-    { id: 1, username: "john_doe", role: "member" },
-    { id: 2, username: "jane_smith", role: "contributor" },
-    { id: 3, username: "alice_jones", role: "admin" },
-    { id: 4, username: "charlie_brown", role: "member" },
+    { id: nextUserId++, username: "john_doe", role: "member" },
+    { id: nextUserId++, username: "jane_smith", role: "contributor" },
+    { id: nextUserId++, username: "alice_jones", role: "admin" },
+    { id: nextUserId++, username: "charlie_brown", role: "member" },
 ];
 type UpdateUser= Partial<User>;
 
@@ -101,8 +112,40 @@ function updateUser(id: number, updates:UpdateUser) {
     Object.assign(foundUser,updates);
 }
 
+function addNewUser(newUser: Omit<User, 'id'>): User {
+    // Create a new variable called `user`, add an `id` property to it
+    let user: User={
+        id: nextUserId,
+        ...newUser
+    }
+    users.push(user);
+    return user
+    // and spread in all the properties of the `newUser` object. Think
+    // about how you should set the type for this `user` object.
+    // Push the new object to the `users` array, and return the object
+    // from the function at the end
+}
+
 // Example updates:
 updateUser(1, { username: "new_john_doe" });
 updateUser(4, { role: "contributor" });
 
 console.log(users)
+
+const gameScores = [14, 21, 33, 42, 59]
+const favoriteThings = ["raindrops on roses", "whiskers on kittens", "bright copper kettles", "warm woolen mittens"];
+const voters = [{ name: "Alice", age: 42 }, { name: "Bob", age: 77 }]
+
+function getLastItem<PlaceholderType>(array: PlaceholderType[]): PlaceholderType | undefined {
+    return array[array.length - 1]
+}
+console.log(getLastItem(gameScores))
+console.log(getLastItem(favoriteThings))
+console.log(getLastItem(voters))
+
+/**
+ * Mini-challenge: call `getLastItem` (and console.log the returned value)
+ * on each of the 3 arrays above. Hover over different values to see what the Intellisense
+ * says about the types for each one.
+ */
+
