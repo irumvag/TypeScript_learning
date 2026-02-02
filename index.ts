@@ -72,20 +72,20 @@ export function getPizzaDetail(identifier: string | number): Pizza | undefined
   }
 }
 
-// addNewPizza({  name: "Chicken Bacon Ranch", price: 12 })
-// addNewPizza({  name: "BBQ Chicken", price: 12 })
-// addNewPizza({  name: "Spicy Sausage", price: 11 })
+addNewPizza({  name: "Chicken Bacon Ranch", price: 12 })
+addNewPizza({  name: "BBQ Chicken", price: 12 })
+addNewPizza({  name: "Spicy Sausage", price: 11 })
 
-// placeOrder("Chicken Bacon Ranch")
-// placeOrder("Pepperoni")
-// completeOrder(1)
-// placeOrder("Anchovy")
-// placeOrder("Veggie")
-// completeOrder(2)
+placeOrder("Chicken Bacon Ranch")
+placeOrder("Pepperoni")
+completeOrder(1)
+placeOrder("Anchovy")
+placeOrder("Veggie")
+completeOrder(2)
 
-// console.log("Menu:", menu)
-// console.log("Cash in register:", cashInRegister)
-// console.log("Order queue:", orderQueue)
+console.log("Menu:", menu)
+console.log("Cash in register:", cashInRegister)
+console.log("Order queue:", orderQueue)
 
 
 type User = {
