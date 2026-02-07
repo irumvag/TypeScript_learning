@@ -10,5 +10,5 @@ const sendMessage = (message: { to: string; text?: string }) => {
         return "Text is empty!";
     }
 };
-
+console.log(sendMessage({to: 'Test', text:"hello alice"}))
 console.log(sendMessage({ to: 'Alice' }));
